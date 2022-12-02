@@ -1,6 +1,8 @@
 mod days;
 pub use days::*;
 
+pub const MAX_DAY: u32 = 2;
+
 pub fn calculate(day: u32) -> (String, String) {
     match day {
         0 => (String::from("Invalid day"), String::new()),

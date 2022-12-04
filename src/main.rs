@@ -8,5 +8,12 @@ fn main() {
         return;
     }
 
-    println!("{:?}", calculate(args[1].parse::<u32>().unwrap_or(0)));
+    match calculate(args[1].parse::<u32>().unwrap_or(0)) {
+        Ok((a,b)) => {
+            println!("Part 1: {}\nPart 2: {}", a, b);
+        },
+        Err(a) => {
+            println!("{}", a);
+        }
+    };
 }

@@ -8,7 +8,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 
     c.bench_function("all days", |b| b.iter(|| {
         for i in 1..=MAX_DAY {
-            calculate(black_box(i));
+            let _ = calculate(black_box(i));
         }
     }));
 }

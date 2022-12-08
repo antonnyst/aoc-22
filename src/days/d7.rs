@@ -69,7 +69,6 @@ fn cd(state: &mut State, arg: &str) {
         },
         arg => {
             if let Some(location) = state.location {
-
                 let result = state.find(&location, arg);
 
                 if let None = result {

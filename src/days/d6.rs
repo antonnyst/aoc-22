@@ -3,47 +3,25 @@ use std::fs;
 pub fn d6() -> (String, String) {
     let read = fs::read("inputs/d6").unwrap();    
 
-    let mut index_1 = 0;
-    for i in 3..read.len() {
-        let slice = &read[i-3..=i];
-        let mut works = true;
-        for x in 0..4 {
-            for y in 0..4 {
-                if x == y {
-                    continue;
-                }
-                if slice[x] == slice[y] {
-                    works = false;
-                    break;
-                }
-            }
-        }
-        if works {
-            index_1 = i + 1;
-            break;
-        }
-    }
-
-    let mut index_2 = 0;
-    for i in 13..read.len() {
-        let slice = &read[i-13..=i];
-        let mut works = true;
-        for x in 0..14 {
-            for y in 0..14 {
-                if x == y {
-                    continue;
-                }
-                if slice[x] == slice[y] {
-                    works = false;
-                    break;
-                }
-            }
-        }
-        if works {
-            index_2 = i + 1;
-            break;
-        }
-    }
+    let index_1 = moving_window(&read, 4);
+    let index_2 = moving_window(&read, 14);
 
     (index_1.to_string(), index_2.to_string())
+}
+
+fn moving_window(data: &Vec<u8>, size: usize) -> usize {
+    let mut seen = vec![0; 128];
+    for i in 0..size {
+        seen[data[i] as usize] += 1;
+    }
+
+    for i in size..data.len() {
+        if !seen.iter().any(|x| x > &1) {
+            return i;
+        }
+
+        seen[data[i] as usize] += 1;
+        seen[data[i-size] as usize] -= 1;
+    };
+    return 0;
 }

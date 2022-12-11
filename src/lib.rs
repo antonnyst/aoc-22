@@ -1,7 +1,7 @@
 mod days;
 pub use days::*;
 
-pub const MAX_DAY: u32 = 10;
+pub const MAX_DAY: u32 = 11;
 
 pub fn calculate(day: u32) -> Result<(String, String), String> {
     match day {
